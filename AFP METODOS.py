@@ -27,9 +27,6 @@ class Usuario:
     if (self.AFP == "Provida" or self.AFP == "provida"):
       capital=self.sueldo*0.1145*1.0452
       return (capital)
-    '''if (self.AFP == "Uno" or self.AFP == "uno"):
-      capital=self.sueldo*0.1069*1.05
-      return(capital)'''    
     print ("AFP invalida")
      
   def ObtenerPension(self): #Obtencion de la pension, con la esperanza de vida del y la jubilacion de cada sexo respectivamente. (Opcion 1)
@@ -55,7 +52,7 @@ class Usuario:
       N1=dif*30
       N2=(N1/(60-self.edad))
     N3=N2*0.97 #Rentabilidad del 3% APV
-    return (N3)
+    return (self.nombre + " debe añadir " + str(N3) + " pesos como APV.")
 
 b=Usuario("Juan",20,"Hombre",10000000,"Capital")
 b.VerificarPension(300000)
@@ -190,7 +187,7 @@ def Opcion2(event):
   ntexto6.grid(row=5, column=1)
 
   boton1 = Button(ventana2, text = "Siguiente", command = Siguiente2, font = ("Arial Bond", 15))
-  boton2 = Button(ventana2, text = "Salir", command = Salir2, font = ("Arial Bond", 15))
+  boton2 = Button(ventana2, text = "Salir", command = Salir3, font = ("Arial Bond", 15))
   boton1.place(x = 0, y = 180)
   boton2.place(x = 0, y = 220)
 
@@ -199,11 +196,11 @@ def Opcion2(event):
 def Siguiente():
   ventana3 = Tk()
   ventana3.title("Resultado")
-  ventana3.geometry("320x50")
+  ventana3.geometry("600x50")
   ventana3.configure(background = "Skyblue")
 
   c = Usuario(texto1.get(), int(texto2.get()), texto3.get(), int(texto4.get()), texto5.get())
-  Funcion1 = Label(ventana3, text = "Su pensión será de: " + str(c.ObtenerPension()), font = ("Arial Bond", 15))
+  Funcion1 = Label(ventana3, text = "La pensión de " + texto1.get() + " será de: " + str(c.ObtenerPension()) + " pesos", font = ("Arial Bond", 15))
   Funcion1.configure(background = "Skyblue")
   Funcion1.pack()
 
@@ -212,7 +209,7 @@ def Siguiente():
 def Siguiente2():
   ventana4 = Tk()
   ventana4.title("Resultado")
-  ventana4.geometry("300x100")
+  ventana4.geometry("600x50")
   ventana4.configure(background = "Skyblue")
 
   d = Usuario(ntexto1.get(),int(ntexto2.get()), ntexto3.get(), int(ntexto4.get()), ntexto5.get())
@@ -225,5 +222,8 @@ def Salir(event):
 
 def Salir2():
     ventana.destroy()
+
+def Salir3():
+    ventana2.destroy()
 
 principal()
